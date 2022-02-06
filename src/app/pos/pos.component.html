@@ -1,0 +1,32 @@
+<div class="m-8">
+  <div class="mb-8">
+    <ng-container
+      *ngTemplateOutlet="(productsLoading$ | async) ? loadingTemplate : allProductsListTemplate"></ng-container>
+  </div>
+
+  <ng-container *ngTemplateOutlet="selectedProductsListTemplate"></ng-container>
+</div>
+
+<ng-template #allProductsListTemplate>
+  <ng-container *ngIf="products$ | async as products">
+    <div class="text-3xl mb-4">All Products</div>
+    <div *ngFor="let product of products" class="border my-1 px-4 py-2 rounded w-1/2 flex justify-between items-center">
+      <span> {{ product.name }} </span>
+      <button (click)="addToCart(product)" class="text-blue-400 hover:underline">Add to cart</button>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #selectedProductsListTemplate>
+  <ng-container *ngIf="selectedProducts$ | async as products">
+    <div class="text-3xl mb-4">Selected Products</div>
+    <div *ngFor="let product of products" class="border my-1 px-4 py-2 rounded w-1/2 flex justify-between items-center">
+      <span> {{ product.name }} </span>
+      <button (click)="removeFromCart(product)" class="text-red-600 hover:underline">Remove</button>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <div class="text-3xl">Loading...</div>
+</ng-template>
