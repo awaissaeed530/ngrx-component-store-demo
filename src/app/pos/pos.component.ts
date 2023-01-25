@@ -1,24 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Product } from '../common/common.types';
 import { PosStore } from './pos.store';
 
 @Component({
   selector: 'app-pos',
-  templateUrl: './pos.component.html'
+  templateUrl: './pos.component.html',
 })
-export class PosComponent implements OnInit {
-
+export class PosComponent {
   products$ = this._posStore.products$;
   selectedProducts$ = this._posStore.selectedProducts$;
   productsLoading$ = this._posStore.productsLoading$;
 
-  constructor(
-    private readonly _posStore: PosStore
-  ) {
-  }
-
-  ngOnInit(): void {
-  }
+  constructor(private readonly _posStore: PosStore) {}
 
   addToCart(product: Product): void {
     this._posStore.addToCart(product);
@@ -27,5 +20,4 @@ export class PosComponent implements OnInit {
   removeFromCart(product: Product): void {
     this._posStore.removeFromCart(product);
   }
-
 }

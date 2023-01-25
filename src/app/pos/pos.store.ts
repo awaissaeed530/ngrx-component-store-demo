@@ -13,23 +13,27 @@ export interface PosState {
 
 @Injectable()
 export class PosStore extends ComponentStore<PosState> {
+  constructor(private readonly _productService: ProductService) {
+    super({ products: [], productsLoading: false, selectedProducts: [] });
+    this.loadProducts();
+  }
 
-  readonly products$ = this.select(state => state.products);
+  readonly products$ = this.select((state) => state.products);
 
-  readonly selectedProducts$ = this.select(state => state.selectedProducts);
+  readonly selectedProducts$ = this.select((state) => state.selectedProducts);
 
-  readonly productsLoading$ = this.select(state => state.productsLoading);
+  readonly productsLoading$ = this.select((state) => state.productsLoading);
 
   readonly addToCart = this.updater((state, product: Product) => ({
     ...state,
     selectedProducts: [...state.selectedProducts, product],
-    products: state.products.filter(x => x.id !== product.id)
+    products: state.products.filter((x) => x.id !== product.id),
   }));
 
   readonly removeFromCart = this.updater((state, product: Product) => ({
     ...state,
-    selectedProducts: state.selectedProducts.filter(x => x.id !== product.id),
-    products: [...state.products, product]
+    selectedProducts: state.selectedProducts.filter((x) => x.id !== product.id),
+    products: [...state.products, product],
   }));
 
   private readonly setProducts = this.updater((state, products: Product[]) => ({
@@ -37,10 +41,12 @@ export class PosStore extends ComponentStore<PosState> {
     products: [...products],
   }));
 
-  private readonly setProductsLoading = this.updater((state, loading: boolean) => ({
-    ...state,
-    productsLoading: loading
-  }));
+  private readonly setProductsLoading = this.updater(
+    (state, loading: boolean) => ({
+      ...state,
+      productsLoading: loading,
+    })
+  );
 
   readonly loadProducts = this.effect(() => {
     this.setProductsLoading(true);
@@ -55,12 +61,4 @@ export class PosStore extends ComponentStore<PosState> {
       })
     );
   });
-
-  constructor(
-    private readonly _productService: ProductService
-  ) {
-    super({ products: [], productsLoading: false, selectedProducts: [] });
-    this.loadProducts();
-  }
-
 }

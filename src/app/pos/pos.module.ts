@@ -4,21 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { PosComponent } from './pos.component';
 import { PosStore } from './pos.store';
 
-const routes: Routes = [
-  { path: '', component: PosComponent }
-];
+const routes: Routes = [{ path: '', component: PosComponent }];
 
 @NgModule({
-  declarations: [
-    PosComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes)
-  ],
-  providers: [
-    PosStore
-  ]
+  declarations: [PosComponent],
+  imports: [CommonModule, RouterModule.forChild(routes)],
+  providers: [PosStore],
 })
-export class PosModule {
-}
+export class PosModule {}

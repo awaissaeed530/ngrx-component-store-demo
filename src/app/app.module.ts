@@ -8,21 +8,20 @@ import { InMemService } from './in-memory-api.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'pos', pathMatch: 'full' },
-  { path: 'pos', loadChildren: () => import('./pos/pos.module').then(m => m.PosModule) }
+  {
+    path: 'pos',
+    loadChildren: () => import('./pos/pos.module').then((m) => m.PosModule),
+  },
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemService, { delay: 1500 })
+    HttpClientInMemoryWebApiModule.forRoot(InMemService, { delay: 1500 }),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
