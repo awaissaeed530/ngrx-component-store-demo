@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { EMPTY } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
-import { Product } from '../common/common.types';
-import { ProductService } from '../common/product.service';
+import { Product, ProductService } from '../common';
 
 export interface PosState {
   products: Product[];

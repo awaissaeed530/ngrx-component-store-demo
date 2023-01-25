@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'pos', pathMatch: 'full' },
   {
     path: 'pos',
-    loadChildren: () => import('./pos/pos.module').then((m) => m.PosModule),
+    loadChildren: () => import('./pos').then((m) => m.PosModule),
   },
 ];
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Product } from '../common/common.types';
+import { Product } from '../common';
 import { PosStore } from './pos.store';
 
 @Component({
